@@ -9,7 +9,6 @@ db_table_name_user = 'user'
 db_table_name_user_login_log = 'user_login_log'
 db_table_name_user_group = 'user_group'
 db_table_name_member_ship = 'member_ship'
-db_table_name_message = 'message'
 
 '''
 用户信息
@@ -114,36 +113,5 @@ class Membership(models.Model):
     class Meta:
         db_table = db_table_name_member_ship
 
-
-#------------------消息信息
-'''
-消息
-'''
-class Message(models.Model):
-    # 表名
-    db_table_name = 'message'
-    # 列名
-    db_column_title = 'title'
-    db_column_content = 'content'
-    db_column_last_modify_time = 'last_modify_time'
-    db_column_create_time = 'create_time'
-    db_column_owner = 'owner'
-
-    # 消息标题
-    title = models.CharField(max_length=64, db_column=db_column_title)
-    # 消息内容
-    content = models.CharField(max_length=1024, db_column=db_column_content)
-    # 最后修改时间
-    last_modify_time = models.DateTimeField(auto_now=True, db_column=db_column_last_modify_time)
-    # 创建时间
-    create_time = models.DateTimeField(auto_now_add=True, db_column=db_column_create_time)
-    # 发布用户
-    owner = models.ForeignKey(User)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        db_table = db_table_name_message
 
 #------------------其他

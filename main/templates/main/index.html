@@ -1,0 +1,31 @@
+{% extends "./main/base_main.html" %}
+
+{% block title %}首页{% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h1>Some info about this site.</h1>
+        <p>Some summary</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="{% url 'message:index' %}">More Message</a>
+        </p>
+    </div>
+</div>
+<div class="container">
+    <div class="starter-template">
+        {% if latest_message_list %}
+            <ul>
+                {% for message in latest_message_list %}
+                    <h1>{{ message.title }}</h1>
+                    <p>{{ message.content }}</p>
+                    <a class="btn btn-default" href="{% url 'message:detail' message.id %}">detail</a>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h1>No message are available.</h1>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

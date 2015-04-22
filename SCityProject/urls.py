@@ -8,4 +8,5 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^main/', include('main.urls', namespace='main')),
+    url(r'^message/', include('message.urls', namespace='message')),
 ]

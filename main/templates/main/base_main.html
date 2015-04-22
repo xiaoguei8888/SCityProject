@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+{% block titlebar %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">SCity Project</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+                {% if username %}
+                    <li>{{ username }}</li>
+                    <li><a href="{% url 'main:logout' %}">退出登录</a></li>
+                {% else %}
+                    <li><a href="{% url 'main:login' %}">登录</a></li>
+                    <li><a href="{% url 'main:register' %}">注册</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+{% block footer %}
+    <div class="footer">
+        <div class="container">
+            <p>Powered by Boss</p>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

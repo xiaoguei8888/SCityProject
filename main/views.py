@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils import timezone
 
 from main.models import User
-from main.models import Message
+from message.models import Message
 from django import forms
 
 #--------------------------------------------
@@ -18,7 +18,7 @@ def index(request):
     context = RequestContext(request, {'username':username,
                                        'latest_message_list':latest_message_list,}
                              );
-    return render(request, './index.html', context)
+    return render(request, './main/index.html', context)
 
 '''
 定义登录表单模型
@@ -58,11 +58,11 @@ def login(request):
             else:
                 context = RequestContext(request, {'login_form':login_form,
                                            'error_messages':error_messages,});
-                return render(request, './login.html', context)
+                return render(request, './main/login.html', context)
     else:
         login_form = LoginForm()
 
-    return render(request, './login.html', {'login_form': login_form})
+    return render(request, './main/login.html', {'login_form': login_form})
 
 '''
 登出
@@ -110,8 +110,8 @@ def register(request):
                 context = RequestContext(request, {'register_form':register_form,
                                            'error_messages':error_messages,}
                                          );
-                return render(request, './register.html', context)
+                return render(request, './main/register.html', context)
     else:
         register_form = RegisterForm()
 
-    return render(request, './register.html', {'register_form': register_form})
+    return render(request, './main/register.html', {'register_form': register_form})
