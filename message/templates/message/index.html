@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">SCity Project</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+                {% if username %}
+                    <li>{{ username }}</li>
+                    <li><a href="{% url 'main:logout' %}">退出登录</a></li>
+                {% else %}
+                    <li><a href="{% url 'main:login' %}">登录</a></li>
+                    <li><a href="{% url 'main:register' %}">注册</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron">
+    <div class="container">
+        <h1>此页面显示所有消息信息</h1>
+        <p>Some summary</p>
+    </div>
+</div>
+<div class="container">
+    <div class="starter-template">
+        {% if latest_message_list %}
+            <ul>
+                {% for message in latest_message_list %}
+                    <li>
+                        <h1>{{ message.title }}</h1>
+                        <p>{{ message.content }}</p>
+                        <a class="btn btn-default" href="{% url 'message:detail' message.id %}">detail</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h1>No message are available.</h1>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
