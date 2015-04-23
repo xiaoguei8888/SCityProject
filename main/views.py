@@ -24,8 +24,20 @@ def index(request):
 定义登录表单模型
 '''
 class LoginForm(forms.Form):
-    username = forms.CharField(label='用户名', max_length=100)
-    password = forms.CharField(label='密码', widget=forms.PasswordInput())
+    username = forms.CharField(label='',
+                               max_length=100,
+                               error_messages={'required':'请输入用户名'},
+                               widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'placeholder':'Username',}),)
+    password = forms.CharField(label='',
+                               help_text="为了您的帐户安全，请至少输入8位字符，最多可输入64位",
+                               widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'type':'password',
+                                                             'placeholder':'Password',
+                                                             }),
+                               max_length=64,
+                               min_length=8,
+                               error_messages={'required':'请输入密码','max_length':'最多输入64位','min_length':'至少输入8位'},)
 
 '''
 登录成功，跳转到主界面

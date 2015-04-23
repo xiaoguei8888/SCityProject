@@ -1,18 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>登录</title>
-</head>
-<body>
-    {% if error_messages %}
-        <p><strong>{{ error_messages }}</strong></p>
-    {% endif %}
+{% extends "main/base.html" %}
 
-    <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{login_form.as_p}}
-<input type="submit" value="ok">
-</form>
-</body>
-</html>
+{% block staticfiles %}
+<link href="/static/main/css/login.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}登录{% endblock %}
+
+{% block titlebar %}{% endblock %}
+{% block content %}
+    <div class="container">
+
+        <form class="form-login" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="form-login-heading">Please login</h2>
+            {% if error_messages %}
+                <p><strong>{{ error_messages }}</strong></p>
+            {% endif %}
+            {{login_form.as_p}}
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember_me">Remember me</label>
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" value="ok">登录</button>
+        </form>
+    </div>
+{% endblock %}
