@@ -11,4 +11,5 @@ urlpatterns = [
 
     url(r'^$', views.index, name='index'),
     url(r'^(\d+)/', views.detail, name='detail'),
+    url(r'^publish$', views.publish, name='publish'),
 ]

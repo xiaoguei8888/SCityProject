@@ -25,19 +25,21 @@ def index(request):
 '''
 class LoginForm(forms.Form):
     username = forms.CharField(label='',
-                               max_length=100,
-                               error_messages={'required':'请输入用户名'},
+                               max_length=32,
+                               error_messages={'required':'请输入用户名',},
                                widget=forms.TextInput(attrs={'class': 'form-control',
                                                              'placeholder':'Username',}),)
     password = forms.CharField(label='',
-                               help_text="为了您的帐户安全，请至少输入8位字符，最多可输入64位",
+                               help_text="为了您的帐户安全，请至少输入8个字符，最多可输入128个字符",
                                widget=forms.TextInput(attrs={'class': 'form-control',
                                                              'type':'password',
                                                              'placeholder':'Password',
                                                              }),
-                               max_length=64,
+                               max_length=128,
                                min_length=8,
-                               error_messages={'required':'请输入密码','max_length':'最多输入64位','min_length':'至少输入8位'},)
+                               error_messages={'required':'请输入密码',
+                                               'max_length':'最多输入128个字符',
+                                               'min_length':'至少输入8个字符',},)
 
 '''
 登录成功，跳转到主界面

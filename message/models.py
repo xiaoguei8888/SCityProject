@@ -21,10 +21,13 @@ class Message(models.Model):
     db_column_create_time = 'create_time'
     db_column_owner = 'owner'
 
+    db_column_title_max_length = 64
+    db_column_content_max_length = 1024
+
     # 消息标题
-    title = models.CharField(max_length=64, db_column=db_column_title)
+    title = models.CharField(max_length=db_column_title_max_length, db_column=db_column_title)
     # 消息内容
-    content = models.CharField(max_length=1024, db_column=db_column_content)
+    content = models.CharField(max_length=db_column_content_max_length, db_column=db_column_content)
     # 最后修改时间
     last_modify_time = models.DateTimeField(auto_now=True, db_column=db_column_last_modify_time)
     # 创建时间
