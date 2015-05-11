@@ -1,31 +1,134 @@
 {% extends "./main/base.html" %}
 
+{% block staticfiles %}
+    <link href="/static/main/css/index.css" rel="stylesheet">
+{% endblock %}
+
 {% block title %}首页{% endblock %}
-{% block content %}
-<div class="jumbotron">
-    <div class="container">
-        <h1>Some info about this site.</h1>
-        <p>Some summary</p>
-        <p>
-            <a class="btn btn-primary btn-lg" href="{% url 'message:index' %}">More Message</a>
-        </p>
-    </div>
-</div>
-<div class="container">
-    <div class="starter-template">
-        {% if latest_message_list %}
-            <ul>
-                {% for message in latest_message_list %}
-                    <h1>{{ message.title }}</h1>
-                    <p>{{ message.content }}</p>
-                    <a class="btn btn-default" href="{% url 'message:detail' message.id %}">detail</a>
-                {% endfor %}
+{% block titlebar %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid dropdown">
+            <div class="navbar-header navbar-brand dropdown-toggle" id="dropdown_navbav_menu" data-toggle="dropdown"
+                 aria-expanded="true">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                <span>社交城市</span>
+            </div>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_navbav_menu">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
             </ul>
-        {% else %}
-            <h1>No message are available.</h1>
-        {% endif %}
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-right">
+                    {% if username %}
+                        <li><a href="{% url 'main:logout' %}">{{ username }}</a></li>
+                        <li><a href="{% url 'main:logout' %}">退出登录</a></li>
+                    {% else %}
+                        <li><a href="{% url 'main:login' %}">登录</a></li>
+                        <li><a href="{% url 'main:register' %}">注册</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <div class="logo-section">
+                    Hello World
+                </div>
+                <div class="input-group input-group-lg">
+                    <div class="input-group-btn dropdown open">
+                        <button id="dropdown_search_type_menu" type="button" class="btn btn-default dropdown-toggle"
+                                data-toggle="dropdown" aria-expanded="false">所有 <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_search_type_menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here omething else here</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" placeholder="找什么东西">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">搜索</button>
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h5>帮助</h5>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="#">建议与反馈</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">使用帮助</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">常见问题</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h5>关注我们</h5>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="#">官方论坛</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">新浪微博</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">微信公众号</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h5>商务合作</h5>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="#">商户中心</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">contact@scity.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+{% endblock %}
+{% block footer %}
+    <div class="footer">
+        <div class="container-fluid">
+            <p class="footer-copy">
+                © 2015 SCity <a href="#">使用必读</a>
+            </p>
+        </div>
+    </div>
 {% endblock %}
 </body>
 </html>

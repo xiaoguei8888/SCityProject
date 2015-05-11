@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
-from main.models import User
+from django.contrib.auth.models import User
 
 
 #------------------消息信息
@@ -25,7 +25,7 @@ class Message(models.Model):
     db_column_content_max_length = 1024
 
     # 消息标题
-    title = models.CharField(max_length=db_column_title_max_length, db_column=db_column_title)
+    title = models.CharField(max_length=db_column_title_max_length, db_column=db_column_title, verbose_name='消息标题')
     # 消息内容
     content = models.CharField(max_length=db_column_content_max_length, db_column=db_column_content)
     # 最后修改时间

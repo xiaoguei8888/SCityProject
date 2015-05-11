@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django import forms
 
 from message.models import Message
-from main.models import User
+from django.contrib.auth.models import User
 
 '''
 消息列表页面

@@ -1,11 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
-from django.views import generic
 from django.utils import timezone
 
-from main.models import User
+from django.contrib.auth.models import User
+from django.contrib import auth
 from message.models import Message
 from django import forms
 
@@ -25,21 +25,28 @@ def index(request):
 '''
 class LoginForm(forms.Form):
     username = forms.CharField(label='',
-                               max_length=32,
-                               error_messages={'required':'请输入用户名',},
+                               required=True,
+                               error_messages={'required': '请输入用户名',
+                                               'min_length': '至少输入8个字符',
+                                               'max_length': '至多输入32个字符', },
                                widget=forms.TextInput(attrs={'class': 'form-control',
-                                                             'placeholder':'Username',}),)
+                                                             'placeholder': '用户名',
+                                                             'min_length': '8',
+                                                             'max_length': '32',
+                                                             }),)
     password = forms.CharField(label='',
-                               help_text="为了您的帐户安全，请至少输入8个字符，最多可输入128个字符",
-                               widget=forms.TextInput(attrs={'class': 'form-control',
-                                                             'type':'password',
-                                                             'placeholder':'Password',
-                                                             }),
-                               max_length=128,
                                min_length=8,
-                               error_messages={'required':'请输入密码',
-                                               'max_length':'最多输入128个字符',
-                                               'min_length':'至少输入8个字符',},)
+                               max_length=32,
+                               required=True,
+                               error_messages={'required': '请输入密码',
+                                               'min_length': '至少输入8个字符',
+                                               'max_length': '至多输入32个字符', },
+                               widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'type': 'password',
+                                                             'placeholder': '密码',
+                                                             'min_length': '8',
+                                                             'max_length': '32',
+                                                             }),)
 
 '''
 登录成功，跳转到主界面
@@ -55,28 +62,41 @@ def login(request):
     print('login')
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
-        if login_form.is_valid() :
+        if login_form.is_valid():
+            error_messages = None
+
+            if request.session.test_cookie_worked():
+                request.session.delete_test_cookie()
+            else:
+                error_messages = '请开启浏览器的Cookie'
             #获取表单用户密码
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
             #获取的表单数据与数据库进行比较
-            error_messages = ''
-            if not User.objects.filter(username__exact = username):
-                error_messages = '用户名不存在'
-            elif not User.objects.filter(password__exact = password):
-                error_messages = '密码错误'
+            if not username:
+                error_messages = '请输入用户名'
+            elif not password:
+                error_messages = '请输入密码'
 
-            if error_messages == '':
-                # 调转到主页面
-                return login_success(username=username)
-            else:
-                context = RequestContext(request, {'login_form':login_form,
-                                           'error_messages':error_messages,});
-                return render(request, './main/login.html', context)
-    else:
-        login_form = LoginForm()
+            if username is not None and password is not None:
+                user = auth.authenticate(username=username, password=password)
+                if user is not None:
+                    if user.is_active:
+                        auth.login(request, user)
+                        # 转到主页面
+                        return login_success(username)
+                    else:
+                        error_messages = '当前账户不可用'
+                else:
+                    error_messages = '用户无效'
 
-    return render(request, './main/login.html', {'login_form': login_form})
+            context = RequestContext(request, {'login_form':login_form,
+                                           'error_messages':error_messages,})
+            return render(request, './main/login.html', context)
+    request.session.set_test_cookie()
+    login_form = LoginForm()
+    context = RequestContext(request, {'login_form':login_form})
+    return render(request, './main/login.html', context)
 
 '''
 登出
@@ -129,3 +149,12 @@ def register(request):
         register_form = RegisterForm()
 
     return render(request, './main/register.html', {'register_form': register_form})
+
+
+#--------------------------------------------
+def meta(request):
+    user_meta = request.META.items()
+    print(user_meta)
+    context = RequestContext(request, {'user_meta':user_meta,})
+    return render(request, './main/meta.html', context)
+

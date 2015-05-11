@@ -9,14 +9,13 @@
 {% block titlebar %}{% endblock %}
 {% block content %}
     <div class="container">
-
         <form class="form-login" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <h2 class="form-login-heading">Please login</h2>
+            <h2 class="form-login-heading">登录</h2>
             {% if error_messages %}
-                <p><strong>{{ error_messages }}</strong></p>
+                <div class="alert alert-danger" role="alert"><strong>{{ error_messages }}</strong></div>
             {% endif %}
-            {{login_form.as_p}}
+            {{ login_form.as_table }}
             <div class="checkbox">
                 <label>
                     <input type="checkbox" value="remember_me">Remember me</label>
