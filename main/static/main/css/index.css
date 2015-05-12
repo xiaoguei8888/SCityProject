@@ -1,0 +1,38 @@
+.content{
+    display: block;
+    width: 100%;
+    min-height: 480px;
+}
+
+.jumbotron{
+    height: 480px;
+    position: relative;
+    background: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/logo_section_background.jpg);
+    background-size: 100% 480px;
+}
+.jumbotron .logo-section{
+    height: 220px;
+    line-height: 220px;
+    font-size: xx-large;
+}
+
+.footer{
+    display: block;
+    width: 100%;
+    padding: 10px 30px;
+    text-align: center;
+}
+
+.footer .container{
+    text-align: center;
+}
+
+.footer .container .footer-copy{
+    margin: 0 auto;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}

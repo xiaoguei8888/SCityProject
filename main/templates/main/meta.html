@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+
+{% block staticfiles %}
+<link href="/static/main/css/login.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}用户信息{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for meta in user_meta %}
+            <p>{{ meta }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
