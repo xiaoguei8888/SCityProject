@@ -114,9 +114,54 @@ def logout(request):
 定义注册表单模型
 '''
 class RegisterForm(forms.Form):
-    username = forms.CharField(label='用户名', max_length=100)
-    password = forms.CharField(label='密码', widget=forms.PasswordInput())
-    phone_number = forms.CharField(label='手机号码', max_length=20)
+    username = forms.CharField(label='',
+                               required=True,
+                               error_messages={'required': '请输入用户名',
+                                               'min_length': '至少输入8个字符',
+                                               'max_length': '至多输入32个字符', },
+                               widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'placeholder': '请输入用户名',
+                                                             'min_length': '8',
+                                                             'max_length': '32',
+                                                             }),)
+    password = forms.CharField(label='',
+                               min_length=8,
+                               max_length=32,
+                               required=True,
+                               error_messages={'required': '请输入密码',
+                                               'min_length': '至少输入8个字符',
+                                               'max_length': '至多输入32个字符', },
+                               widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'type': 'password',
+                                                             'placeholder': '请输入密码',
+                                                             'min_length': '8',
+                                                             'max_length': '32',
+                                                             }),)
+    password_again = forms.CharField(label='',
+                               min_length=8,
+                               max_length=32,
+                               required=True,
+                               error_messages={'required': '请再次输入密码',
+                                               'min_length': '至少输入8个字符',
+                                               'max_length': '至多输入32个字符', },
+                               widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'type': 'password',
+                                                             'placeholder': '请确认密码',
+                                                             'min_length': '8',
+                                                             'max_length': '32',
+                                                             }),)
+    phone_number = forms.CharField(label='',
+                               min_length=8,
+                               max_length=32,
+                               required=True,
+                               error_messages={'required': '请输入手机号码',
+                                               'min_length': '至少输入8个字符',
+                                               'max_length': '至多输入32个字符', },
+                               widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'placeholder': '请输入手机号码',
+                                                             'min_length': '8',
+                                                             'max_length': '32',
+                                                             }),)
 
 def register(request):
     print('register')
@@ -126,10 +171,13 @@ def register(request):
             #获取表单用户信息
             username = register_form.cleaned_data['username']
             password = register_form.cleaned_data['password']
+            password_again = register_form.cleaned_data['password_again']
             phone_number = register_form.cleaned_data['phone_number']
             #获取的表单数据与数据库进行比较
             error_messages = ''
-            if User.objects.filter(username__exact = username):
+            if password != password_again:
+                error_messages = '两次输入密码不相同'
+            elif User.objects.filter(username__exact = username):
                 error_messages = '用户名已注册'
             elif User.objects.filter(phone_number__exact = phone_number):
                 error_messages = '手机号码已注册'

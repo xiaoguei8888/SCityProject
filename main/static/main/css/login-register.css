@@ -3,20 +3,20 @@ body {
   padding-bottom: 40px;
 }
 
-.form-login {
+.form {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
 }
-.form-login .form-login-heading,
-.form-login .checkbox {
+.form .form-heading,
+.form .checkbox {
   margin-bottom: 10px;
 }
-.form-login .checkbox {
+.form .checkbox {
   font-weight: normal;
   text-align: left;
 }
-.form-login .form-control {
+.form .form-control {
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -25,25 +25,26 @@ body {
   padding: 10px;
   font-size: 16px;
 }
-.form-login .form-control:focus {
+.form .form-control:focus {
   z-index: 2;
 }
-.form-login input[type="text"] {
+.form input[type="text"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.form-login input[type="password"] {
+.form input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.form-login .errorlist{
+.form .errorlist{
+  text-align: left;
     list-style-type:none;
 }
-.form-login .errorlist li{
+.form .errorlist li{
     color: red
 }
-.form-login .helptext {
+.form .helptext {
     color: dodgerblue;
 }

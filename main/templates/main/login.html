@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 
 {% block staticfiles %}
-<link href="/static/main/css/login.css" rel="stylesheet">
+<link href="/static/main/css/login-register.css" rel="stylesheet">
 {% endblock %}
 
 {% block title %}登录{% endblock %}
@@ -9,9 +9,9 @@
 {% block titlebar %}{% endblock %}
 {% block content %}
     <div class="container">
-        <form class="form-login" method="post" enctype="multipart/form-data">
+        <form class="form" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <h2 class="form-login-heading">登录</h2>
+            <h2 class="form-heading">登录</h2>
             {% if error_messages %}
                 <div class="alert alert-danger" role="alert"><strong>{{ error_messages }}</strong></div>
             {% endif %}
