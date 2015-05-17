@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'bootstrap',
     'common',
     'main',
+    'publish',
     'message',
 )
 

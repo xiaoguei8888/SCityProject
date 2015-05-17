@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 
 {% block staticfiles %}
-<link href="/static/main/css/login-register.css" rel="stylesheet">
+    <link href="/static/main/css/login-register.css" rel="stylesheet">
 {% endblock %}
 
 {% block title %}注册{% endblock %}
@@ -9,20 +9,46 @@
 {% block titlebar %}{% endblock %}
 {% block content %}
     <div class="container">
-
-    <form class="form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-            <h2 class="form-heading">注册</h2>
-            {% if error_messages %}
-                <div class="alert alert-danger" role="alert"><strong>{{ error_messages }}</strong></div>
+        <form class="form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="text-center text-primary">注册</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert-danger{% endif %}" role="alert"><strong>{{ message }}</strong></div>
+                {% endfor %}
             {% endif %}
-        {{ register_form.as_table }}
+            <div class="form-group">
+                {% if register_form.username.errors %}
+                    {% for error in register_form.username.errors %}
+                        <span class="label label-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+                <p>{{ register_form.username }}</p>
+                {% if register_form.password.errors %}
+                    {% for error in register_form.password.errors %}
+                        <span class="label label-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+                <p>{{ register_form.password }}</p>
+                {% if register_form.password_again.errors %}
+                    {% for error in register_form.password_again.errors %}
+                        <span class="label label-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+                <p>{{ register_form.password_again }}</p>
+                {% if register_form.phone_number.errors %}
+                    {% for error in register_form.phone_number.errors %}
+                        <span class="label label-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+                <p>{{ register_form.phone_number }}</p>
+            </div>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" value="remember_me"><a href="#">同意《用户协议》</a></label>
                 </label>
             </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="ok">注册</button>
-    </form>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" value="ok">注册</button>
+        </form>
     </div>
 {% endblock %}

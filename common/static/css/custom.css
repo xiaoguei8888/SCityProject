@@ -9,3 +9,24 @@ body {
 body {
     text-align: center;
 }
+
+.form {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.form .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form .form-control:focus {
+    z-index: 2;
+}

@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from message import views
+from publish import views
 
 urlpatterns = [
     # Examples:
@@ -10,6 +10,4 @@ urlpatterns = [
     #url(r'^$', views.IndexView.as_view(), name='index'),
 
     url(r'^$', views.index, name='index'),
-    # url(r'^(\d+)/', views.detail, name='detail'),
-    # url(r'^message', views.message, name='message'),
 ]

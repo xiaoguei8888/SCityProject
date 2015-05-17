@@ -2,17 +2,18 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+# Create your models here.
 
-#------------------消息信息
+#------------------消息
 
-db_table_name_message = 'message'
+db_table_name_publish = 'publish'
 
 '''
 消息
 '''
-class Message(models.Model):
+class Publish(models.Model):
     # 表名
-    db_table_name = 'message'
+    db_table_name = 'publish'
     # 列名
     db_column_title = 'title'
     db_column_content = 'content'
@@ -38,4 +39,4 @@ class Message(models.Model):
         return self.title
 
     class Meta:
-        db_table = db_table_name_message
+        db_table = db_table_name_publish
