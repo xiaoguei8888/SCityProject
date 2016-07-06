@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from search import jsons
+from search import json
 
 urlpatterns = [
-    url(r'^$', jsons.parse, name='search'),
+    url(r'^$', json.parse, name='search'),
 ]

@@ -12,14 +12,14 @@ from django.contrib.auth.models import User
 '''
 产品列表页面
 '''
-def index(request):
-    print('product index')
+def list(request):
+    print('product list')
     username = request.COOKIES.get('username')
     latest_product_list = Product.objects.filter(create_time__lte=timezone.now()).order_by('-create_time')[:5]
     context = RequestContext(request, {'username':username,
                                        'latest_product_list':latest_product_list,}
                              );
-    return render(request, './product/index.html', context)
+    return render(request, './product/list.html', context)
 
 '''
 产品详情页面

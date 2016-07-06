@@ -34,9 +34,9 @@ class Product(models.Model):
     # 产品图片
     image = models.CharField(max_length=db_column_image_max_length, db_column=db_column_image, verbose_name='产品图片')
     # 最后修改时间
-    last_modify_time = models.DateTimeField(auto_now=True, db_column=db_column_last_modify_time)
+    last_modify_time = models.DateTimeField(auto_now=True, db_column=db_column_last_modify_time, verbose_name='最后修改时间')
     # 创建时间
-    create_time = models.DateTimeField(auto_now_add=True, db_column=db_column_create_time)
+    create_time = models.DateTimeField(auto_now_add=True, db_column=db_column_create_time, verbose_name='创建时间')
 
     def __str__(self):
         return self.name
