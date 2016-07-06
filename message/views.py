@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 消息列表页面
 '''
 def index(request):
-    print('message index')
+    print('product index')
     username = request.COOKIES.get('username')
     latest_message_list = Message.objects.filter(create_time__lte=timezone.now()).order_by('-create_time')[:5]
     context = RequestContext(request, {'username':username,
@@ -29,7 +29,7 @@ def detail(request, id):
     username = request.COOKIES.get('username')
     message = Message.objects.get(id=id)
     context = RequestContext(request, {'username':username,
-                                       'message':message,}
+                                       'product':message,}
                              );
     return render(request, './message/detail.html', context)
 
@@ -56,7 +56,7 @@ class PublishMessageForm(forms.Form):
                                                'min_length':'至少输入8个字符',},)
 
 def publish(request):
-    print('message publish')
+    print('product publish')
     if request.method == 'POST':
         publish_message_form = PublishMessageForm(request.POST)
         if publish_message_form.is_valid():
@@ -81,7 +81,7 @@ def publish(request):
                                     content = content,
                                     owner = User.objects.get(id=1),
                                     )
-                return HttpResponseRedirect(reverse("message:index"))
+                return HttpResponseRedirect(reverse("product:index"))
             else:
                 context = RequestContext(request, {'publish_message_form':publish_message_form,
                                            'error_messages':error_messages,})

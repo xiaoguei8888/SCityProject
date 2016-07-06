@@ -8,6 +8,9 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^main/', include('main.urls', namespace='main')),
-    url(r'^message/', include('message.urls', namespace='message')),
+    url(r'^message/', include('message.urls', namespace='product')),
     url(r'^publish/', include('publish.urls', namespace='publish')),
+    url(r'^product/', include('product.urls', namespace='product')),
+    # 搜索
+    url(r'^search', include('search.urls', namespace='search')),
 ]

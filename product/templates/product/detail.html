@@ -30,22 +30,13 @@
 </nav>
 <div class="jumbotron">
     <div class="container">
-        <h1>此页面显示所有消息信息</h1>
-        <p>Some summary</p>
-    </div>
-</div>
-<div class="container">
-    <div class="starter-template">
-        {% if latest_message_list %}
-            <ul>
-                {% for message in latest_message_list %}
-                    <li>
-                        <h1>{{ message.title }}</h1>
-                        <p>{{ message.content }}</p>
-                        <a class="btn btn-default" href="{% url 'product:detail' message.id %}">detail</a>
-                    </li>
-                {% endfor %}
-            </ul>
+        {% if product %}
+            <h1>Title: {{ product.name }}</h1>
+            <p>Content:{{ product.desc }}</p>
+            <p>Owner: {{ product.price }}</p>
+            <p>Owner: {{ product.image }}</p>
+            <p>Last modify time: {{ product.last_modify_time }}</p>
+            <p>Create time: {{ product.create_time }}</p>
         {% else %}
             <h1>No message are available.</h1>
         {% endif %}
