@@ -20,7 +20,6 @@ def list(request):
 
 def detail(request, id):
     print('product detail with id', id)
-    product = Product.objects.get(id=id)
+    product = Product.objects.filter(id=id)
     data = serializers.serialize('json', product)
     return HttpResponse(data, content_type='application/json')
-    pass
